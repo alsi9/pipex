@@ -14,14 +14,18 @@
 
 int        get_next_line(char **line)
 {
-    int        bytes_buf;
+    int     bytes_buf;
     char    buffer[1];
-    int        i;
+    int     i;
     char    *join;
 
-    if (!(*line = malloc(1)) || !line)
+    
+    i = 0;
+    (*line) = (char *) malloc(sizeof(char) * 1);
+    if (!(*line) || !line)
         return (-1);
     (*line)[0] = '\0';
+    num = 1;
     while ((bytes_buf = read(0, buffer, 1)) > 0)
     {
         if (buffer[0] == '\0' || buffer[0] == '\n')
@@ -29,7 +33,8 @@ int        get_next_line(char **line)
         i = 0;
         while ((*line)[i])
             i++;
-        if (!(join = malloc(i + 2)))
+        join = (char *) malloc(sizeof(char) * ((ft_strlen(*line)) + 2));
+        if (!join)
             return (-1);
         i = 0;
         while ((*line)[i] != '\0')
