@@ -6,19 +6,11 @@
 /*   By: ephantom <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 11:28:47 by ephantom          #+#    #+#             */
-/*   Updated: 2021/11/30 15:46:44 by                  ###   ########.fr       */
+/*   Updated: 2021/12/21 18:00:41 by ephantom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-static void	ft_add(int i, char buffer, char **line, char *join)
-{
-	join[i++] = buffer;
-	join[i] = '\0';
-	free(*line);
-	*line = join;
-}
 
 int	get_next_line(char **line)
 {
@@ -44,7 +36,10 @@ int	get_next_line(char **line)
 			join[i] = (*line)[i];
 			i++;
 		}
-		ft_add(i, buffer[0], line, join);
+        join[i++] = buffer;
+        join[i] = '\0';
+        free(*line);
+        *line = join;
 	}
 	return (num);
 }
