@@ -21,7 +21,7 @@ int        get_next_line(char **line)
 
     
     i = 0;
-    (*line) = (char *) malloc(sizeof(char) * 1);
+    (*line) = (char *)malloc(sizeof(char) * 1);
     if (!(*line) || !line)
         return (-1);
     (*line)[0] = '\0';
@@ -33,7 +33,7 @@ int        get_next_line(char **line)
         i = 0;
         while ((*line)[i])
             i++;
-        join = (char *) malloc(sizeof(char) * (i + 2));
+        join = (char *)malloc(sizeof(char) * (i + 2));
         if (!join)
             return (-1);
         i = 0;
@@ -47,5 +47,5 @@ int        get_next_line(char **line)
         free(*line);
         *line = join;
     }
-    return (bytes_buf);
+    return (num);
 }
