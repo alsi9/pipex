@@ -12,34 +12,35 @@
 
 #include "pipex.h"
 
-int	get_next_line(char **line)
+int        get_next_line(char **line)
 {
-	int		i;
-	int		num;
-	char	*join;
-	char	buffer[1];
+    int        bytes_buf;
+    char    buffer[1];
+    int        i;
+    char    *join;
 
-	i = 0;
-	(*line) = (char *) malloc(sizeof(char) * 1);
-	if (!(*line) || !line)
-		return (-1);
-	(*line)[0] = '\0';
-	num = 1;
-	while ((num > 0) && buffer[0] != '\n')
-	{
-		num = read(0, buffer, 1);
-		join = (char *) malloc(sizeof(char) * ((ft_strlen(*line)) + 2));
-		if (!join)
-			return (-1);
-		while ((*line)[i])
-		{
-			join[i] = (*line)[i];
-			i++;
-		}
-        join[i++] = buffer;
-        join[i] = '\0';
+    if (!(*line = malloc(1)) || !line)
+        return (-1);
+    (*line)[0] = '\0';
+    while ((bytes_buf = read(0, buffer, 1)) > 0)
+    {
+        if (buffer[0] == '\0' || buffer[0] == '\n')
+            break ;
+        i = 0;
+        while ((*line)[i])
+            i++;
+        if (!(join = malloc(i + 2)))
+            return (-1);
+        i = 0;
+        while ((*line)[i] != '\0')
+        {
+            join[i] = (*line)[i];
+            i++;
+        }
+        join[i++] = buffer[0];
+        join[i++] = '\0';
         free(*line);
         *line = join;
-	}
-	return (num);
+    }
+    return (bytes_buf);
 }
