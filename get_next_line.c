@@ -14,9 +14,9 @@
 
 int        get_next_line(char **line)
 {
-    int     bytes_buf;
-    char    buffer[1];
     int     i;
+    char    buffer[1];
+    int     num;
     char    *join;
 
     
@@ -26,14 +26,14 @@ int        get_next_line(char **line)
         return (-1);
     (*line)[0] = '\0';
     num = 1;
-    while ((bytes_buf = read(0, buffer, 1)) > 0)
+    while ((num = read(0, buffer, 1)) > 0)
     {
         if (buffer[0] == '\0' || buffer[0] == '\n')
             break ;
         i = 0;
         while ((*line)[i])
             i++;
-        join = (char *) malloc(sizeof(char) * ((ft_strlen(*line)) + 2));
+        join = (char *) malloc(sizeof(char) * (i + 2));
         if (!join)
             return (-1);
         i = 0;
